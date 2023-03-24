@@ -79,6 +79,7 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
