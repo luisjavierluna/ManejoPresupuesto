@@ -20,7 +20,7 @@
             <strong>Depositos</strong>
         </div>
         <div class="activo">
-            @Model.BalanceDepositos.ToString("N");
+            @Model.BalanceDepositos.ToString("N")
         </div>
     </div>
     <div>
@@ -28,7 +28,7 @@
             <strong>Retiros</strong>
         </div>
         <div class="pasivo">
-            @Model.BalanceRetiros.ToString("N");
+            @Model.BalanceRetiros.ToString("N")
         </div>
     </div>
     <div>
@@ -36,7 +36,7 @@
             <strong>Totales</strong>
         </div>
         <div>
-            @Model.Total.ToString("N");
+            @Model.Total.ToString("N")
         </div>
     </div>
 </div>
@@ -65,7 +65,8 @@ else
                 {
                     <tr style="vertical-align: middle">
                         <td>
-                            <a asp-controller="transacciones" asp-action="Editar" asp-route-id="@transaccion.Id">
+                            <a asp-controller="transacciones" asp-action="Editar" 
+                            asp-route-id="@transaccion.Id" asp-route-urlRetorno="@ViewBag.urlRetorno">
                                 <i class="bi-pencil"></i>
                             </a>
                         </td>
