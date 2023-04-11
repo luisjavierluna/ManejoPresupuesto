@@ -9,8 +9,8 @@ namespace ManejoPresupuesto.Servicios
         Task Actualizar(Categoria categoria);
         Task Borrar(int id);
         Task Crear(Categoria categoria);
-        Task<IEnumerable<Categoria>> Obtener(int usuarioId);
         Task<IEnumerable<Categoria>> Obtener(int usuarioId, TipoOperacion tipoOperacionId);
+        Task<IEnumerable<Categoria>> Obtener(int usuarioId, PaginacionViewModel paginacion);
         Task<Categoria> ObtenerPorId(int id, int usuarioId);
     }
 
@@ -35,11 +35,16 @@ namespace ManejoPresupuesto.Servicios
             categoria.Id = id;
         }
 
-        public async Task<IEnumerable<Categoria>> Obtener(int usuarioId)
+        public async Task<IEnumerable<Categoria>> Obtener(int usuarioId, PaginacionViewModel paginacion)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Categoria>(
-                "SELECT * FROM Categorias WHERE UsuarioId = @UsuarioId",
+            return await connection.QueryAsync<Categoria>(@$"
+                SELECT * 
+                FROM Categorias 
+                WHERE UsuarioId = @UsuarioId
+                ORDER BY Nombre
+                OFFSET {paginacion.RecordsASaltar} ROWS FETCH NEXT 
+                    {paginacion.RecordsPorPagina} ROWS ONLY",
                 new { usuarioId });
         }
 
