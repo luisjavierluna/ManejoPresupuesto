@@ -29,10 +29,10 @@ namespace ManejoPresupuesto.Controllers
                 Pagina = paginacionViewModel.Pagina,
                 RecordsPorPagina = paginacionViewModel.RecordsPorPagina,
                 CantidadTotalRecords = totalCategorias,
-                BaseURL = "/categorias"
+                BaseURL = Url.Action()
             };
 
-            return View(respuestaVM);
+            return View(respuestaVM); //Se aplica un breakpoint var revisar si respuestaVM atrapa "categoria" en la variable BaseURL
         }
 
         [HttpGet]
